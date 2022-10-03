@@ -90,13 +90,13 @@ class TeamServiceTest {
     private TeamDto generateTeamDto() {
         return TeamDto.builder().currency("TRY")
                 .name("FCB")
-                .fund(10000L)
+                .fund(10000.0)
                 .build();
     }
 
     private Team generateTeam() {
         return Team.builder().id(1L)
-                .fund(10000L)
+                .fund(10000.0)
                 .currency("TRY")
                 .name("FCB").build();
     }

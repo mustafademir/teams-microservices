@@ -15,6 +15,6 @@ public class TeamDto {
     private Long id;
     private String name;
     private String currency;
-    private Long fund;
+    private Double fund;
     private List<PlayerDto> playerDtoList;
 }

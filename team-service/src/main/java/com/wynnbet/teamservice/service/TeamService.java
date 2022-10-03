@@ -67,9 +67,9 @@ public class TeamService {
         Team destinationTeam = teamRepository.findById(transferDto.getDestinationTeamId())
                 .orElseThrow(() -> new EntityNotFoundException(transferDto.getDestinationTeamId() + TEAM_NOT_FOUND_MESSAGE));
         PlayerDto player = playerClient.getPlayer(transferDto.getPlayerId()).getBody();
-        long transferFee = calculateTransferFee(player);
-        Long sourceTeamCommission = transferFee/10;
-        Long destinationTeamContractFee = transferFee + sourceTeamCommission;
+        Double transferFee = calculateTransferFee(player);
+        Double sourceTeamCommission = transferFee/10;
+        Double destinationTeamContractFee = transferFee + sourceTeamCommission;
 
         sourceTeam.setFund(sourceTeam.getFund() + sourceTeamCommission);
         teamRepository.save(sourceTeam);
@@ -80,8 +80,10 @@ public class TeamService {
         return true;
     }
 
-    private long calculateTransferFee(PlayerDto player) {
-        return (calculateMonthsOfExperience(player) * (100000 / calculateAge(player)));
+    private Double calculateTransferFee(PlayerDto player) {
+        Double ageFactor = 100000 / ((double)calculateAge(player));
+        Double experience = (double) calculateMonthsOfExperience(player);
+        return experience * ageFactor;
     }
 
     private long calculateMonthsOfExperience(PlayerDto player) {

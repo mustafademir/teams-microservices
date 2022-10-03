@@ -25,6 +25,6 @@ public class Team {
     private String currency;
 
     @Column(name = "fund")
-    private Long fund;
+    private Double fund;
 
 }
